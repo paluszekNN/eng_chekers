@@ -23,7 +23,7 @@ class Checkers:
                 if row + col % 2 == 0:
                     self.board_state[row].append(None)
                 else:
-                    self.board_state[row].append(WhitePawn([row, col]))
+                    self.board_state[row].append(WhitePawn())
 
     def transition_to(self, state: State):
         self._state = state

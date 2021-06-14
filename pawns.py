@@ -2,76 +2,60 @@ from abc import ABC, abstractmethod
 
 
 class Pawn(ABC):
-    @abstractmethod
-    def move(self, new_position):
-        pass
+    def __init__(self, up: bool, down: bool):
+        self._down = [None, None]
+        self._up = [None, None]
+        if up:
+            self._up = [-1, -1]
+        if down:
+            self._down = [1, 1]
+
+    @property
+    def moving(self):
+        return [self._down, self._up]
 
 
 class WhitePawn(Pawn):
-    def __init__(self, position):
-        self.position = position
-
-    def move(self, new_position):
-        self.position = new_position
+    def __init__(self):
+        super().__init__(False, True)
 
 
 class BlackPawn(Pawn):
-    def __init__(self, position):
-        self.position = position
-
-    def move(self, new_position):
-        self.position = new_position
+    def __init__(self):
+        super().__init__(True, False)
 
 
-class King(ABC):
-    @abstractmethod
-    def move(self, new_position):
-        pass
+class WhiteKing(Pawn):
+    def __init__(self):
+        super().__init__(True, True)
 
 
-class WhiteKing(King):
-    def __init__(self, position):
-        self.position = position
-
-    def move(self, new_position):
-        self.position = new_position
-
-
-class BlackKing(King):
-    def __init__(self, position):
-        self.position = position
-
-    def move(self, new_position):
-        self.position = new_position
+class BlackKing(Pawn):
+    def __init__(self):
+        super().__init__(True, True)
 
 
 class NewPawn(ABC):
     @abstractmethod
-    def create_pawn(self, position) -> Pawn:
-        pass
-
-
-class NewKing(ABC):
-    @abstractmethod
-    def create_king(self, position) -> King:
+    def create_pawn(self) -> Pawn:
         pass
 
 
 class NewWhitePawn(NewPawn):
-    def create_pawn(self, position) -> Pawn:
-        return WhitePawn(position)
+    def create_pawn(self) -> Pawn:
+        return WhitePawn()
 
 
 class NewBlackPawn(NewPawn):
-    def create_pawn(self, position) -> Pawn:
-        return BlackPawn(position)
+    def create_pawn(self) -> Pawn:
+        return BlackPawn()
 
 
-class NewWhiteKing(NewKing):
-    def create_king(self, position) -> King:
-        return WhiteKing(position)
+class NewWhiteKing(NewPawn):
+    def create_king(self) -> Pawn:
+        return WhiteKing()
 
 
-class NewBlackKing(NewKing):
-    def create_king(self, position) -> King:
-        return BlackKing(position)
+class NewBlackKing(NewPawn):
+    def create_king(self) -> Pawn:
+        return BlackKing()
