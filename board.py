@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from pawns import BlackKing, BlackPawn, WhitePawn, WhiteKing
+from pawns import NewBlackKing, NewBlackPawn, NewWhitePawn, NewWhiteKing
 
 
 class Move:
@@ -17,13 +17,31 @@ class Checkers:
     def __init__(self, state: State) -> None:
         self.transition_to(state)
         self.board_state = []
+        self.new_white_pawn = NewWhitePawn()
+        self.new_black_pawn = NewBlackPawn()
+        self.new_white_king = NewWhiteKing()
+        self.new_black_king = NewBlackKing()
+
         for row in range(3):
             self.board_state.append([])
             for col in range(8):
-                if row + col % 2 == 0:
+                if (row + col) % 2 == 0:
                     self.board_state[row].append(None)
                 else:
-                    self.board_state[row].append(WhitePawn())
+                    self.board_state[row].append(self.new_white_pawn.create_pawn())
+
+        for row in range(3,5):
+            self.board_state.append([])
+            for col in range(8):
+                self.board_state[row].append(None)
+
+        for row in range(5,8):
+            self.board_state.append([])
+            for col in range(8):
+                if (row + col) % 2 == 0:
+                    self.board_state[row].append(None)
+                else:
+                    self.board_state[row].append(self.new_black_pawn.create_pawn())
 
     def transition_to(self, state: State):
         self._state = state

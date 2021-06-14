@@ -52,10 +52,10 @@ class NewBlackPawn(NewPawn):
 
 
 class NewWhiteKing(NewPawn):
-    def create_king(self) -> Pawn:
+    def create_pawn(self) -> Pawn:
         return WhiteKing()
 
 
 class NewBlackKing(NewPawn):
-    def create_king(self) -> Pawn:
+    def create_pawn(self) -> Pawn:
         return BlackKing()
