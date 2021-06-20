@@ -119,6 +119,28 @@ class TestGame(unittest.TestCase):
                        [0, -1, 0, -1, 0, -1, 0, -1],
                        [-1, 0, -1, 0, -1, 0, -1, 0]]
         self.assertEqual(game.transposition_board(), check_board)
+        move = Move('B3', 'D5')
+        game.request(move)
+        check_board = [[0, 1, 0, 1, 0, 1, 0, 1],
+                       [1, 0, 0, 0, 1, 0, 1, 0],
+                       [0, 0, 0, 0, 0, 1, 0, 1],
+                       [0, 0, 0, 0, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 0],
+                       [1, 0, 0, 0, -1, 0, -1, 0],
+                       [0, -1, 0, -1, 0, -1, 0, -1],
+                       [-1, 0, -1, 0, -1, 0, -1, 0]]
+        self.assertEqual(game.transposition_board(), check_board)
+        move = Move('G2', 'F3')
+        game.request(move)
+        check_board = [[0, 1, 0, 1, 0, 1, 0, 1],
+                       [1, 0, 0, 0, 1, 0, 1, 0],
+                       [0, 0, 0, 0, 0, 1, 0, 1],
+                       [0, 0, 0, 0, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 0],
+                       [1, 0, -1, 0, -1, 0, -1, 0],
+                       [0, 0, 0, -1, 0, -1, 0, -1],
+                       [-1, 0, -1, 0, -1, 0, -1, 0]]
+        self.assertEqual(game.transposition_board(), check_board)
 
     def test_ending_win(self):
         new_white_pawn = NewWhitePawn()
