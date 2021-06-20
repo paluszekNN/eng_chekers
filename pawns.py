@@ -3,16 +3,16 @@ from abc import ABC, abstractmethod
 
 class Pawn(ABC):
     def __init__(self, up: bool, down: bool):
-        self._down = [None, None]
-        self._up = [None, None]
+        self.down = 0
+        self.up = 0
         if up:
-            self._up = [-1, -1]
+            self.up = -1
         if down:
-            self._down = [1, 1]
+            self.down = 1
 
     @property
     def moving(self):
-        return [self._down, self._up]
+        return [self.down, self.up]
 
 
 class WhitePawn(Pawn):
